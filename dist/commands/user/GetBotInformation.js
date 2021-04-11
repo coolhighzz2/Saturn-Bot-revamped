@@ -10,7 +10,7 @@ function run(bot, msg, args) {
     const embed = new discord_js_1.MessageEmbed();
     embed
         .setAuthor('SATURN Properties', (_a = bot.user) === null || _a === void 0 ? void 0 : _a.avatarURL())
-        .setDescription(`• Saturn © Discord Bot — version 2.0\n• Created and maintained by <@260866537798369299>`)
+        .setDescription(`• Saturn © Discord Bot — version 2.0\n• GNU General Public License v3.0\n• Created and maintained by [Felipe Lara](https://github.com/felpshn)`)
         .addField('Bot Status', `• Currently **ONLINE** and listening commands on **"${msg.guild.name}"** server`)
         .addField('Host Status', `• OS: ${hostInformation}\n• Uptime: ${FormatSecondsToTime_1.formatSecondsToTime(os_1.uptime())}\n• Memory Usage: ${memoryUsage.toFixed(2)} MB (${(memoryUsage * 100 / 512).toFixed(2)}%)\n• Discord API Latency: ${bot.ws.ping} ms`)
         .addField('Source', '• [GitHub | Where the world builds software](https://github.com/felpshn/saturn-bot)')
@@ -20,7 +20,7 @@ function run(bot, msg, args) {
     msg.channel.send({ embed });
 }
 exports.default = {
-    name: '.saturn',
+    name: `${process.env.BOT_PREFIX}bot`,
     help: 'Displays bot properties',
     permissionLvl: 0,
     run
