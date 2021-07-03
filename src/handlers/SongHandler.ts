@@ -3,9 +3,9 @@ import ytdl from 'ytdl-core';
 
 import Song from '../structs/Song';
 import Bot from "../structs/Bot";
-import { IQueue } from '../types';
 import ReactionHandler from './ReactionHandler';
 import { dropBotQueueConnection } from '../utils/DropBotQueueConnection';
+import { IQueue } from '../types';
 
 class SongHandler extends Song {
   constructor(bot: Bot, msg: Message) {
@@ -37,6 +37,8 @@ class SongHandler extends Song {
     }
 
     try {
+      if (!queue.connection) throw Error('No connection settled.');
+
       queue.dispatcher = queue.connection.play(
         ytdl(song.url, {
           filter: 'audioonly',
@@ -46,7 +48,7 @@ class SongHandler extends Song {
 
       const embed = new MessageEmbed();
       embed
-        .setAuthor('We hear you 💜', 'https://raw.githubusercontent.com/felpshn/saturn-bot/master/assets/cd.gif')
+        .setAuthor('We hear you 💜', 'https://raw.githubusercontent.com/felpshn/saturn-bot/master/src/assets/cd.gif')
         .setThumbnail(song.thumbnail)
         .setDescription(`Now playing **[${song.title}](${song.url})** requested by <@${queue.authors[0]}>`)
         .setFooter(`Song duration: ${song.timestamp}`)
